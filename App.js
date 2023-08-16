@@ -1,24 +1,35 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import { store } from "./store";
-
-export default function App() {
-	return (
-		<Provider store={store}>
-			<View style={styles.container}>
-				<Text>Hii!</Text>
-				<StatusBar style="auto" />
-			</View>
-		</Provider>
-	);
+import Home from "./screens/home";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+{
+	/* We need to use SafeAreaProvider for react-native-elements, react-native-vector-icons */
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});
+export default function App() {
+	const Stack = createNativeStackNavigator();
+
+	return (
+		<SafeAreaProvider>
+			<Provider store={store}>
+				<NavigationContainer>
+					<Stack.Navigator>
+						<Stack.Screen
+							name="Home"
+							component={Home}
+							options={{ headerShown: false }}
+						/>
+					</Stack.Navigator>
+					<StatusBar
+						barStyle={"dark-content"}
+						backgroundColor={"white"}
+						animated={true}
+					/>
+				</NavigationContainer>
+			</Provider>
+		</SafeAreaProvider>
+	);
+}
