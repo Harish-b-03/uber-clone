@@ -1,13 +1,23 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+	SafeAreaView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import React from "react";
 import tw from "twrnc";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_API_KEY } from "@env";
 import { useDispatch } from "react-redux";
 import { setDestination, setStartLocation } from "../slices/nav-slice";
+import { ParamListBase, useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 const Home = () => {
 	const dispatch = useDispatch();
+	const navigation =
+		useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
 	return (
 		<SafeAreaView
@@ -48,6 +58,22 @@ const Home = () => {
 					nearbyPlacesAPI="GooglePlacesSearch"
 					debounce={400}
 				/>
+			</View>
+			<View>
+				<View>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("Map")}
+					>
+						<Text>Book a ride</Text>
+					</TouchableOpacity>
+				</View>
+				<View>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("Food")}
+					>
+						<Text>Order Food</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</SafeAreaView>
 	);
