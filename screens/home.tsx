@@ -13,8 +13,9 @@ import { useDispatch } from "react-redux";
 import { setDestination, setStartLocation } from "../slices/nav-slice";
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StatusBar } from "react-native";
 
-const Home = () => {
+const HomeScreen = () => {
 	const dispatch = useDispatch();
 	const navigation =
 		useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -75,10 +76,15 @@ const Home = () => {
 					</TouchableOpacity>
 				</View>
 			</View>
+			<StatusBar
+				barStyle={"dark-content"}
+				backgroundColor={"white"}
+				animated={true}
+			/>
 		</SafeAreaView>
 	);
 };
 
-export default Home;
+export default HomeScreen;
 
 const styles = StyleSheet.create({});
